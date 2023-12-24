@@ -75,6 +75,7 @@ const Matches = () => {
       });
     } finally {
       setLoading(false)
+      console.log(userChats)
     }
   }
 

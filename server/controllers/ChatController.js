@@ -1,5 +1,5 @@
-const { Chat, Message, User, UserProfile } = require('../models')
-const { Op } = require('sequelize');
+const { Chat, Message, User, UserProfile, Sequelize, sequelize } = require('../models')
+const { Op, literal } = require('sequelize');
 
 class ChatController {
     static async createChatList(req, res, next) {
@@ -38,31 +38,55 @@ class ChatController {
 
     static async findUserChat(req, res, next) {
         try {
-            let existingChat = await Chat.findAll({
+            const loggedInUserId = req.user.id;
+    
+            const existingChats = await Chat.findAll({
                 where: {
                     [Op.or]: [
                         {
-                            UserIdA: req.user.id,
+                            UserIdA: loggedInUserId,
                         },
                         {
-                            UserIdB: req.user.id,
+                            UserIdB: loggedInUserId,
                         },
                     ],
                 },
-                include: {
-                    model: User,
-                    include: {
-                        model: UserProfile,
+                include: [
+                    {
+                        model: User,
+                        as: 'UserA',
+                        include: {
+                            model: UserProfile,
+                            as: 'UserProfile',
+                        },
                     },
-                },
-            })
-            if (existingChat) {
-                return res.status(200).json(existingChat)
+                    {
+                        model: User,
+                        as: 'UserB',
+                        include: {
+                            model: UserProfile,
+                            as: 'UserProfile',
+                        },
+                    },
+                ],
+            });
+    
+            if (existingChats && existingChats.length > 0) {
+                const transformedChats = existingChats.map(chat => ({
+                    id: chat.id,
+                    UserIdA: chat.UserIdA,
+                    UserIdB: chat.UserIdB,
+                    createdAt: chat.createdAt,
+                    updatedAt: chat.updatedAt,
+                    User: loggedInUserId === chat.UserIdA ? chat.UserB : chat.UserA,
+                }))
+    
+                return res.status(200).json(transformedChats)
             } else {
-                throw { name: "errorNotFound" }
+                throw { name: 'errorNotFound' };
             }
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 

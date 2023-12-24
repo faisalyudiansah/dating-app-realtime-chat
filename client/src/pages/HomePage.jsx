@@ -27,7 +27,7 @@ const HomePage = () => {
     }
   }
 
-  const handleAction = async (action) => {
+  const handleAction = async (action, username) => {
     try {
       if (action === "skip") {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % userData.length);
@@ -41,6 +41,10 @@ const HomePage = () => {
             },
           }
         );
+        Swal.fire({
+          icon: 'success',
+          text: `You ${action} ${username}`,
+        });
         setCurrentIndex((prevIndex) => (prevIndex + 1) % userData.length);
       }
     } catch (error) {
@@ -89,13 +93,13 @@ const HomePage = () => {
                 <p>{userData[currentIndex].UserProfile.bio}</p>
                 <div className="card-actions justify-left">
                   <button
-                    onClick={() => handleAction('dislike')}
+                    onClick={() => handleAction('dislike', userData[currentIndex].username)}
                     className="btn bg-base-300 hover:bg-base-100 rounded-xl"
                   >
                     Dislike
                   </button>
                   <button
-                    onClick={() => handleAction('like')}
+                    onClick={() => handleAction('like', userData[currentIndex].username)}
                     className="btn bg-base-300 hover:bg-base-100 rounded-xl"
                   >
                     Like
