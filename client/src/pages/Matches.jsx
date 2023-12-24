@@ -1,12 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
-import { MdOutlineMarkChatUnread } from "react-icons/md";
 import InputEmoji from "react-input-emoji"
 
 import { useDispatch, useSelector } from 'react-redux'
 import { userProfileFetch } from "../store/appSlice"  // panggil function nya
 
+import ListMatches from '../components/ListMatches';
+import Loading from '../components/Loading';
+
+import socket from '../socket'
+import ListChatUser from '../components/ListChatUser';
+import NoSelectedChat from '../components/NoSelectedChat';
 
 const Matches = () => {
   let [matchesData, setMatchesData] = useState([])
@@ -26,7 +31,6 @@ const Matches = () => {
   let [isAddtoChatListCalled, setIsAddtoChatListCalled] = useState(false)
   let [matchId, setMatchId] = useState(null)
   let [newTextMessage, setNewTextMessage] = useState('')
-  let [successSendMsg, setSuccessSendMsg] = useState(false)
 
   function formatterDate(value) {
     let date = new Date(value);
@@ -143,7 +147,6 @@ const Matches = () => {
         },
       })
       setNewTextMessage('')
-      setSuccessSendMsg(true)
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -164,9 +167,8 @@ const Matches = () => {
     if (currentChatId !== null) {
       exportMessage(currentChatId)
     }
-    setSuccessSendMsg(false)
     dispatch(userProfileFetch())
-  }, [currentChatId, successSendMsg])
+  }, [currentChatId])
 
   useEffect(() => {
     showMatches()
@@ -176,15 +178,7 @@ const Matches = () => {
   return (
     <>
       {loading ? (
-        // Tampilkan loading spinner atau pesan loading
-        <div className="m-10">
-          <div className="mockup-window border bg-base-200 p-10 flex flex-col items-center">
-            <h2 className="font-bold flex justify-center font-serif mb-7 text-2xl text-primary-500">
-              Loading...
-            </h2>
-            <span className="loading loading-spinner loading-lg"></span>
-          </div>
-        </div>
+        <Loading />
       ) : (
         <section>
           <div className="m-10">
@@ -195,44 +189,17 @@ const Matches = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 m-10 lg:grid-cols-4 gap-4">
-            {matchesData.map((match) => (
-              <div key={match.id} className="card lg:card-side shadow-xl">
-                <div className="card-body bg-base-200">
-                  <button onClick={() => {
-                    addtoChatList(match.id)
-                  }} className='btn bg-base-100'>{match.username}</button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ListMatches matchesData={matchesData} addtoChatList={addtoChatList} />
 
           <div className="m-10 ">
             <div className="card  lg:card-side mt-4 shadow-xl">
 
-              <figure className='flex flex-col max-w-lg'>
-                {userChats.map((chat, index) => (
-                  <div key={index} className="card  w-40 card-side shadow-xl">
-                    <div className="card-body bg-base-200 text-base-content">
-                      <span className='new-message-user m-3'><MdOutlineMarkChatUnread /></span>
-                      <button onClick={() => {
-                        currentChat(chat.id, chat.User.UserProfile.fullname, chat.User.UserProfile.profilePicture, chat.User.id)
-                      }} className='btn bg-base-100'>
-                        {chat.User.UserProfile.fullname}
-                      </button>
-                      <span className='user-online mt-8 mx-4'></span>
-                    </div>
-                  </div>
-                ))}
-              </figure>
+              <ListChatUser userChats={userChats} currentChat={currentChat} />
 
               {userChats.length > 0 && (
                 <div className="card-body bg-base-200">
                   {currentChatId === null ? (
-                    <div className='text-center'>
-                      <p>No chat selected. </p>
-                      <p>Please select a chat to start chatting</p>
-                    </div>
+                    <NoSelectedChat />
                   ) : loadingMsg ? (
                     <h1 className='text-center'><span className="loading loading-bars loading-md"></span></h1>
                   ) : (
