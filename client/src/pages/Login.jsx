@@ -80,7 +80,7 @@ const Login = () => {
                 <span htmlFor='email' className="mb-2 text-md">Email</span>
                 <input
                   type="text"
-                  className="w-full p-2 rounded-md"
+                  className="w-full p-2 rounded-md border"
                   name="email"
                   id="email"
                   onChange={changeInput}
@@ -93,7 +93,7 @@ const Login = () => {
                   name="password"
                   id="password"
                   onChange={changeInput}
-                  className="w-full p-2 rounded-md"
+                  className="w-full p-2 rounded-md border"
                 />
               </div>
               <button
