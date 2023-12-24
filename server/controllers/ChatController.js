@@ -71,7 +71,7 @@ class ChatController {
                 ],
             });
     
-            if (existingChats && existingChats.length > 0) {
+            if (existingChats) {
                 const transformedChats = existingChats.map(chat => ({
                     id: chat.id,
                     UserIdA: chat.UserIdA,
