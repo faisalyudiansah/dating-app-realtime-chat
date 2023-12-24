@@ -29,16 +29,20 @@ const HomePage = () => {
 
   const handleAction = async (action) => {
     try {
-      await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/${action}/${userData[currentIndex].id}`,
-        {},
-        {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.access_token,
-          },
-        }
-      );
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % userData.length);
+      if (action === "skip") {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % userData.length);
+      } else {
+        await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/users/${action}/${userData[currentIndex].id}`,
+          {},
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.access_token,
+            },
+          }
+        );
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % userData.length);
+      }
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -86,15 +90,21 @@ const HomePage = () => {
                 <div className="card-actions justify-left">
                   <button
                     onClick={() => handleAction('dislike')}
-                    className="btn bg-base-100 rounded-xl"
+                    className="btn bg-base-300 hover:bg-base-100 rounded-xl"
                   >
                     Dislike
                   </button>
                   <button
                     onClick={() => handleAction('like')}
-                    className="btn bg-base-100 rounded-xl"
+                    className="btn bg-base-300 hover:bg-base-100 rounded-xl"
                   >
                     Like
+                  </button>
+                  <button
+                    onClick={() => handleAction('skip')}
+                    className="btn bg-base-300 hover:bg-base-100 rounded-xl"
+                  >
+                    Skip
                   </button>
                 </div>
               </div>
