@@ -1,0 +1,92 @@
+[
+    {
+        "fullname": "Cristiano Ronaldo",
+        "birthdate": "1990-01-01",
+        "profilePicture": "https://i.pinimg.com/originals/02/0b/e8/020be873dd54cf7ea8f32dda27bd29ad.jpg",
+        "address": "Portugal",
+        "occupation": "Football Player",
+        "bio": "I'm the best player in the world ",
+        "UserId": 1
+    },
+    {
+        "fullname": "Selena Gomez",
+        "birthdate": "1985-05-15",
+        "profilePicture": "https://i.pinimg.com/736x/3f/c3/c1/3fc3c113473a2f3354046c45a484bdf9.jpg",
+        "address": "456 Oak Avenue, Town",
+        "occupation": "Singer",
+        "bio": "I'm one of the best singer in the world",
+        "UserId": 2
+    },
+    {
+        "fullname": "Ricardo Kaka",
+        "birthdate": "1983-03-07",
+        "profilePicture": "https://i.pinimg.com/originals/e6/b1/fa/e6b1fa7fdff157c55c9d913c9a96fc71.jpg",
+        "address": "Brazil",
+        "occupation": "Data Engineering",
+        "bio": "I'm the best Data Engineering in the town",
+        "UserId": 3
+    },
+    {
+        "fullname": "Lisa Blackpink",
+        "birthdate": "1997-10-10",
+        "profilePicture": "https://i.pinimg.com/originals/05/22/e6/0522e66d5a03f7c4a1235054ceab9145.jpg",
+        "address": "South Korea",
+        "occupation": "Girlband",
+        "bio": "I'm a member of Girlband from South Korea",
+        "UserId": 4
+    },
+    {
+        "fullname": "Lionel Messi",
+        "birthdate": "1980-03-01",
+        "profilePicture": "https://i.pinimg.com/1200x/8b/d6/44/8bd6449bd4fcc047132ea400cfebaa6a.jpg",
+        "address": "Argentina",
+        "occupation": "Software Engineering",
+        "bio": "I'm the best Software Engineering in the town",
+        "UserId": 5
+    },
+    {
+        "fullname": "Ariana Grande",
+        "birthdate": "1989-10-10",
+        "profilePicture": "https://i.pinimg.com/1200x/d7/50/0a/d7500a0d265ea90d683ed52e3e4c4d2b.jpg",
+        "address": "451 Green, Los Santos",
+        "occupation": "Cooky",
+        "bio": "I'm the best Cooky in the city",
+        "UserId": 6
+    },
+    {
+        "fullname": "Marco Reus",
+        "birthdate": "1992-02-10",
+        "profilePicture": "https://i.pinimg.com/564x/55/32/17/553217da2d19d785b899d8c77973a726.jpg",
+        "address": "288 Dortmund, Germany",
+        "occupation": "Model",
+        "bio": "I'm the best Model in my country",
+        "UserId": 7
+    },
+    {
+        "fullname": "Billie Eilish",
+        "birthdate": "2000-02-09",
+        "profilePicture": "https://i.pinimg.com/originals/fc/07/53/fc07530f1489445b8b57565e5f8e0b97.jpg",
+        "address": "Los Angeles, California, US",
+        "occupation": "Singer",
+        "bio": "I'm one of the best Singer in my country",
+        "UserId": 8
+    },
+    {
+        "fullname": "Sergio Ramos",
+        "birthdate": "1986-02-10",
+        "profilePicture": "https://i.pinimg.com/1200x/b9/32/15/b93215bbf61b8df594643185c51f9f7e.jpg",
+        "address": "Madrid, Spain",
+        "occupation": "Football Player",
+        "bio": "I'm the best defender in the world",
+        "UserId": 9
+    },
+    {
+        "fullname": "Cardi B",
+        "birthdate": "1990-10-10",
+        "profilePicture": "https://i.pinimg.com/736x/6e/96/e2/6e96e2d2dbaa53a27ce40f7ac730f2ab.jpg",
+        "address": "Macedonia, US",
+        "occupation": "Teacher",
+        "bio": "I'm a Teacher from one of the bootcamp in US",
+        "UserId": 10
+    }
+]

@@ -1,0 +1,102 @@
+[
+    {
+        "username": "ronaldo",
+        "email": "ronaldo@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "male",
+        "interest": "female",
+        "show": true
+    },
+    {
+        "username": "selena",
+        "email": "selena@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "female",
+        "interest": "male",
+        "show": true
+    },
+    {
+        "username": "kaka",
+        "email": "kaka@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "male",
+        "interest": "female",
+        "show": true
+    },
+    {
+        "username": "lisa",
+        "email": "lisa@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "female",
+        "interest": "male",
+        "show": true
+    },
+    {
+        "username": "messi",
+        "email": "messi@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "male",
+        "interest": "female",
+        "show": true
+    },
+    {
+        "username": "ariana",
+        "email": "ariana@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "female",
+        "interest": "male",
+        "show": true
+    },
+    {
+        "username": "reus",
+        "email": "reus@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "male",
+        "interest": "female",
+        "show": true
+    },
+    {
+        "username": "billie",
+        "email": "billie@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "female",
+        "interest": "male",
+        "show": true
+    },
+    {
+        "username": "ramos",
+        "email": "ramos@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "male",
+        "interest": "female",
+        "show": true
+    },
+    {
+        "username": "cardi",
+        "email": "cardi@gmail.com",
+        "password": "$2a$10$t5mkeqnEQ9Z9Xc35.uRuXOGjp7.EYKnQMtlak8LZB8z4J2ZQJ5t66",
+        "subscription": true,
+        "remainingLikes": null,
+        "gender": "female",
+        "interest": "male",
+        "show": true
+    }
+]
