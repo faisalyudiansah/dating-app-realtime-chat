@@ -10,6 +10,7 @@ import ListMatches from '../components/ListMatches';
 import Loading from '../components/Loading';
 import ListChatUser from '../components/ListChatUser';
 import NoSelectedChat from '../components/NoSelectedChat';
+import ChatBox from '../components/ChatBox';
 
 import socket from '../socket'
 
@@ -239,30 +240,14 @@ const Matches = () => {
                   ) : loadingMsg ? (
                     <h1 className='text-center'><span className="loading loading-bars loading-md"></span></h1>
                   ) : (
-                    <div className='chat-box bg-base-secondary border' ref={chatBoxRef}>
-                      <div className='chat-header bg-base-300'>
-                        <p className='text-base text-center'>{nameUserOnChat}</p>
-                      </div>
-                      <div className='p-4  h-[370px]'>
-
-                        {message && message.map((msg, i) => (
-                          <div key={i} className={`chat ${msg.SenderId === userProfile.id ? 'chat-end' : 'chat-start'}`}>
-                            <div className="chat-image avatar">
-                              <div className="w-10 rounded-full">
-                                <img className='hidden sm:block' src={msg.SenderId === userProfile.id ? userProfile.UserProfile.profilePicture : profilePictureUserOnChat} />
-                              </div>
-                            </div>
-                            <div className="chat-bubble">{msg.content}</div>
-                            <div className="chat-footer opacity-50">
-                              {msg.SenderId === userProfile.id && (
-                                <span>Delivered </span>
-                              )}
-                              {formatterDate(msg.createdAt)}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    <ChatBox
+                      chatBoxRef={chatBoxRef}
+                      nameUserOnChat={nameUserOnChat}
+                      message={message}
+                      userProfile={userProfile}
+                      formatterDate={formatterDate}
+                      profilePictureUserOnChat={profilePictureUserOnChat}
+                    />
                   )}
                   {currentChatId !== null ? (
                     <InputEmoji
