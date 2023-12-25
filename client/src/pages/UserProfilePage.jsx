@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userProfileFetch } from "../store/appSlice"  // panggil function nya
 
 import socket from "../socket"
+import ButtonProfilePage from '../components/ButtonProfilePage'
+import Loading from '../components/Loading'
 
 const UserProfilPage = () => {
   let dispatch = useDispatch()
@@ -53,12 +55,7 @@ const UserProfilPage = () => {
   return (
     <>
       {loading ? (
-        <div className="m-10">
-          <div className="mockup-window border bg-base-200 p-10 flex flex-col items-center">
-            <h2 className="font-bold flex justify-center font-serif mb-7 text-2xl text-primary-500">Loading...</h2>
-            <span className="loading loading-spinner loading-lg"></span>
-          </div>
-        </div>
+        <Loading />
       ) : (
         <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
 
@@ -105,16 +102,7 @@ const UserProfilPage = () => {
               <p className="pt-8 text">Username : {userProfile.username}</p>
               <p className="pt-4 text-md">{userProfile.UserProfile.bio}</p>
 
-              <div className="pt-12 pb-8">
-                <a href='/edit-profile' className="bg-base-300 hover:bg-base-100 text-base font-bold py-2 px-4 rounded-full">
-                  Edit Profile
-                </a>
-                {!userProfile.subscription && (
-                  <button onClick={handlePayment} className="bg-base-300 hover:bg-base-100 text-base mx-3 font-bold py-2 px-4 rounded-full">
-                    Subscription
-                  </button>
-                )}
-              </div>
+              <ButtonProfilePage userProfile={userProfile} handlePayment={handlePayment} />
 
             </div>
           </div>
