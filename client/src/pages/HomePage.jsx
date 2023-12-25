@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import React, { useEffect, useState } from 'react';
+import socket from "../socket"
 
 const HomePage = () => {
   const [userData, setUserData] = useState([]);
@@ -58,6 +59,10 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    socket.auth = {
+      access_token : localStorage.access_token
+    }
+    socket.connect()
     showUser();
   }, []); // Hapus currentIndex dan userData dari dependencies untuk menghindari pemanggilan berulang
 

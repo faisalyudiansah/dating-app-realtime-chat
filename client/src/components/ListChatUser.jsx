@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdOutlineMarkChatUnread } from "react-icons/md";
 
-const ListChatUser = ({ userChats, currentChat }) => {
+const ListChatUser = ({ userChats, currentChat, idUserOnline }) => {
   return (
     <>
       <figure className='flex flex-col max-w-lg'>
@@ -14,7 +14,9 @@ const ListChatUser = ({ userChats, currentChat }) => {
               }} className='btn bg-base-100'>
                 {chat.User.UserProfile.fullname}
               </button>
-              <span className='user-online mt-8 mx-4'></span>
+              {idUserOnline.some((onlineUser) => onlineUser.idUserOnline === chat.User.id) && (
+                <span className='user-online mt-8 mx-4'></span>
+              )}
             </div>
           </div>
         ))}

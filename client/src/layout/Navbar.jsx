@@ -3,6 +3,7 @@ import NavbarDropdownResponsive from './NavbarDropdownResponsive'
 import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import socket from "../socket"
 
 const Navbar = () => {
   let navigate = useNavigate()
@@ -23,14 +24,27 @@ const Navbar = () => {
       confirmButtonText: "Logout",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem('access_token')
-        navigate('/login')
+        handleLogout()
       }
     })
   }
 
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem('access_token');
+      socket.disconnect();
+      navigate('/login');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  }
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
+
+    return () => {
+      socket.disconnect()
+    }
   }, [theme])
   return (
     <>

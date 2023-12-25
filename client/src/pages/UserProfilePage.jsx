@@ -10,6 +10,8 @@ import { RiGitRepositoryPrivateFill } from "react-icons/ri"
 import { useDispatch, useSelector } from 'react-redux'
 import { userProfileFetch } from "../store/appSlice"  // panggil function nya
 
+import socket from "../socket"
+
 const UserProfilPage = () => {
   let dispatch = useDispatch()
   let { loading, userProfile } = useSelector((state) => state.appReducer)
@@ -42,6 +44,10 @@ const UserProfilPage = () => {
   }
 
   useEffect(() => {
+    socket.auth = {
+      access_token : localStorage.access_token
+    }
+    socket.connect()
     dispatch(userProfileFetch())
   }, [])
   return (

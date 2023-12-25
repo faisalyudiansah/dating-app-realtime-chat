@@ -3,7 +3,8 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveSubmitUpdated } from "../store/appSlice"  // panggil function nya
+import { saveSubmitUpdated } from "../store/appSlice" 
+import socket from "../socket"
 
 const EditUserProfile = () => {
   let navigate = useNavigate()
@@ -82,6 +83,10 @@ const EditUserProfile = () => {
   }
 
   useEffect(() => {
+    socket.auth = {
+      access_token : localStorage.access_token
+    }
+    socket.connect()
     fetching()
   }, [])
 

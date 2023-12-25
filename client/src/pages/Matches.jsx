@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Swal from 'sweetalert2'
 import InputEmoji from "react-input-emoji"
 
@@ -8,12 +8,13 @@ import { userProfileFetch } from "../store/appSlice"  // panggil function nya
 
 import ListMatches from '../components/ListMatches';
 import Loading from '../components/Loading';
-
-import socket from '../socket'
 import ListChatUser from '../components/ListChatUser';
 import NoSelectedChat from '../components/NoSelectedChat';
 
+import socket from '../socket'
+
 const Matches = () => {
+  let chatBoxRef = useRef()
   let [matchesData, setMatchesData] = useState([])
   let [loading, setLoading] = useState(true)
   let [loadingMsg, setLoadingMsg] = useState(true)
@@ -32,12 +33,22 @@ const Matches = () => {
   let [matchId, setMatchId] = useState(null)
   let [newTextMessage, setNewTextMessage] = useState('')
 
-  function formatterDate(value) {
-    let date = new Date(value);
-    let year = date.getFullYear();
-    let month = `${date.getMonth() + 1}`.padStart(2, '0')
-    let day = `${date.getDate()}`.padStart(2, '0')
-    return `${year}-${month}-${day}`
+  let [idUserOnline, setIdUserOnline] = useState([])
+
+  function formatterDate(dateString) {
+    try {
+      const parsedDate = new Date(dateString);
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }
+      return parsedDate.toLocaleDateString('en-US', options);
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return 'Invalid Date';
+    }
   }
 
   async function showMatches() {
@@ -79,7 +90,6 @@ const Matches = () => {
       });
     } finally {
       setLoading(false)
-      console.log(userChats)
     }
   }
 
@@ -134,7 +144,7 @@ const Matches = () => {
 
   async function sendMessage() {
     try {
-      await axios({
+      let newText = await axios({
         method: 'post',
         url: import.meta.env.VITE_BASE_URL + `/message`,
         data: {
@@ -146,6 +156,7 @@ const Matches = () => {
           Authorization: 'Bearer ' + localStorage.access_token,
         },
       })
+      socket.emit("message:new", newText)
       setNewTextMessage('')
     } catch (error) {
       Swal.fire({
@@ -171,8 +182,33 @@ const Matches = () => {
   }, [currentChatId])
 
   useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  }, [message])
+
+  useEffect(() => {
+    socket.auth = {
+      access_token: localStorage.access_token
+    }
+    socket.connect()
+
+    socket.on("user:online", (userOnline) => {
+      setIdUserOnline(userOnline)
+    })
+    socket.on("message:update", (newText) => {
+      setMessage(current => {
+        return [...current, newText.data]
+      })
+    })
+
     showMatches()
     findChat()
+
+    return () => {
+      socket.off("user:online")
+      socket.off("message:update")
+    }
   }, [matchId]);
 
   return (
@@ -194,7 +230,7 @@ const Matches = () => {
           <div className="m-10 ">
             <div className="card  lg:card-side mt-4 shadow-xl">
 
-              <ListChatUser userChats={userChats} currentChat={currentChat} />
+              <ListChatUser userChats={userChats} currentChat={currentChat} idUserOnline={idUserOnline} />
 
               {userChats.length > 0 && (
                 <div className="card-body bg-base-200">
@@ -203,7 +239,7 @@ const Matches = () => {
                   ) : loadingMsg ? (
                     <h1 className='text-center'><span className="loading loading-bars loading-md"></span></h1>
                   ) : (
-                    <div className='chat-box bg-base-secondary border '>
+                    <div className='chat-box bg-base-secondary border' ref={chatBoxRef}>
                       <div className='chat-header bg-base-300'>
                         <p className='text-base text-center'>{nameUserOnChat}</p>
                       </div>
