@@ -2,6 +2,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import React, { useEffect, useState } from 'react';
 import socket from "../socket"
+import Loading from '../components/Loading';
 
 const HomePage = () => {
   const [userData, setUserData] = useState([]);
@@ -69,14 +70,7 @@ const HomePage = () => {
   return (
     <>
       {loading ? (
-        <div className="m-10">
-          <div className="mockup-window border bg-base-200 p-10 flex flex-col items-center">
-            <h2 className="font-bold flex justify-center font-serif mb-7 text-2xl text-primary-500">
-              Loading...
-            </h2>
-            <span className="loading loading-spinner loading-lg"></span>
-          </div>
-        </div>
+        <Loading />
       ) : (
         <section>
           <div className="m-10">
